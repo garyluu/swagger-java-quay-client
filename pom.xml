@@ -6,6 +6,34 @@
     <version>1.2.11-SNAPSHOT</version>
     <name>swagger-java-quay-client</name>
     <url>http://maven.apache.org</url>
+    <repositories>
+     <repository>
+            <id>artifacts.oicr.on.ca</id>
+            <name>artifacts.oicr.on.ca</name>
+            <url>https://artifacts.oicr.on.ca/artifactory/collab-release</url>
+        </repository>
+        <repository>
+            <id>seqware.sourceforge.net</id>
+            <name>SeqWare Maven Repository</name>
+            <url>https://seqwaremaven.oicr.on.ca/artifactory/collab-release</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>seqwaremaven.oicr.on.ca</id>
+            <name>seqwaremaven.oicr.on.ca-releases</name>
+            <url>https://seqwaremaven.oicr.on.ca/artifactory/seqware-dependencies</url>
+        </repository>
+        <repository>
+            <id>apache-releases</id>
+            <name>Apache Releases repository</name>
+            <url>https://repository.apache.org/content/repositories/releases/</url>
+    </repository>
+    </repositories>
     <parent>
         <version>1.8.0-alpha.1</version>
         <groupId>io.dockstore</groupId>
