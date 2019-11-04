@@ -3,7 +3,7 @@
     <groupId>io.swagger</groupId>
     <artifactId>swagger-java-quay-client</artifactId>
     <packaging>jar</packaging>
-    <version>1.3.0</version>
+    <version>1.3.${revision}</version>
     <name>swagger-java-quay-client</name>
     <url>http://maven.apache.org</url>
     <repositories>
