@@ -12,6 +12,11 @@
         <name>GitHub garyluu Apache Maven Packages</name>
         <url>https://maven.pkg.github.com/garyluu/swagger-java-quay-client</url>
       </repository>
+      <snapshotRepository>
+        <id>github</id>
+        <name>GitHub garyluu Apache Maven Packages</name>
+        <url>https://maven.pkg.github.com/garyluu/swagger-java-quay-client</url>
+      </snapshotRepository>
     </distributionManagement>
     <build>
         <plugins>
