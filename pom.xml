@@ -3,7 +3,7 @@
     <groupId>io.swagger</groupId>
     <artifactId>swagger-java-quay-client</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.5</version>
+    <version>1.0.6-SNAPSHOT</version>
     <name>swagger-java-quay-client</name>
     <url>http://maven.apache.org</url>
     <distributionManagement>
@@ -132,7 +132,7 @@
 		<url>https://github.com/garyluu/swagger-java-quay-client</url>
 		<connection>scm:git:git://github.com/garyluu/swagger-java-quay-client.git</connection>
 		<developerConnection>scm:git:git@github.com:garyluu/swagger-java-quay-client.git</developerConnection>
-	  <tag>swagger-java-quay-client-1.0.5</tag>
+	  <tag>HEAD</tag>
   </scm>
     <properties>
         <swagger-annotations-version>1.5.20</swagger-annotations-version>
