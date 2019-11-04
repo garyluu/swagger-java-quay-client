@@ -163,7 +163,8 @@
                 </executions>
             </plugin>
 
-            <!-- attach test jar -->
+            <!-- don't attach test jar -->
+<!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -177,6 +178,8 @@
                 <configuration>
                 </configuration>
             </plugin>
+-->
+          <!-- don't attach source jar -->
 	    <plugin>
 		<groupId>org.apache.maven.plugins</groupId>
 		<artifactId>maven-source-plugin</artifactId>
