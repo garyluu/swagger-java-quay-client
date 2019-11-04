@@ -3,19 +3,19 @@
     <groupId>io.swagger</groupId>
     <artifactId>swagger-java-quay-client</artifactId>
     <packaging>jar</packaging>
-    <version>1.2.1-SNAPSHOT</version>
+    <version>1.2.5</version>
     <name>swagger-java-quay-client</name>
     <url>http://maven.apache.org</url>
     <distributionManagement>
       <repository>
         <id>github</id>
         <name>releases</name>
-	<url>https://maven.pkg.github.com/garyluu/swagger-java-quay-client/releases</url>
+	<url>https://maven.pkg.github.com/garyluu/swagger-java-quay-client</url>
       </repository>
       <snapshotRepository>
         <id>github</id>
         <name>snapshots</name>
-	<url>https://maven.pkg.github.com/garyluu/swagger-java-quay-client/snapshots</url>
+	<url>https://maven.pkg.github.com/garyluu/swagger-java-quay-client</url>
       </snapshotRepository>
     </distributionManagement>
     <build>
@@ -50,7 +50,22 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+	</plugin>
+	    <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-source-plugin</artifactId>
+		<configuration>
+			<skipSource>true</skipSource>
+		</configuration>
+		<executions>
+			<execution>
+				<id>attach-sources</id>
+				<goals>
+					<goal>jar</goal>
+				</goals>
+			</execution>
+		</executions>
+	   </plugin>
         </plugins>
     </build>
     <dependencies>
