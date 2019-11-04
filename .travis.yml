@@ -4,13 +4,15 @@ services:
 
 cache:
   directories:
-  - $HOME/.cache
-  - $HOME/.m2/repository
+  - $HOME/.m2
 
 dist: bionic
 language: java
 jdk: openjdk12
+before_install: "curl -o swagger.yaml 'https://quay.io//api/v1/discovery?' -H 'x-requested-with: XMLHttpRequest'"
+script: bash script.sh || travis_terminate 0
 deploy:
         provider: script
         script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn -Drevision=$TRAVIS_BUILD_NUMBER deploy"
         skip_cleanup: true
+
