@@ -352,7 +352,7 @@
    </dependencies>
    <scm>
 	   <url>https://github.com/garyluu/swagger-java-quay-client</url>
-	   <connection>scm:git:git@github.com:garyluu/swagger-java-quay-client</connection>
-	   <developerConnection>scm:git:git@github.com:garyluu/swagger-java-quay-client</developerConnection>
+	   <connection>scm:git:git@github.com:garyluu/swagger-java-quay-client.git</connection>
+	   <developerConnection>scm:git:git@github.com:garyluu/swagger-java-quay-client.git</developerConnection>
    </scm>
 </project>
