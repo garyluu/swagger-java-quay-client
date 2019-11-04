@@ -12,5 +12,5 @@ language: java
 jdk: openjdk12
 deploy:
         provider: script
-        script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn -Drevision=$BUILD_NUMBER deploy"
+        script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn -Drevision=$TRAVIS_BUILD_NUMBER deploy"
         skip_cleanup: true
