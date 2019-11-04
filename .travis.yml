@@ -11,5 +11,5 @@ language: java
 jdk: openjdk12
 deploy:
         provider: script
-        script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn -B release:prepare && mvn release:perform -Darguments=\"-Dmaven.javadoc.skip=true\""
+        script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn -Drevision=$BUILD_NUMBER deploy scm:tag -Darguments=\"-Dmaven.javadoc.skip=true\""
         skip_cleanup: true

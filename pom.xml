@@ -53,7 +53,14 @@
       </snapshotRepository>
     </distributionManagement>
     <build>
-        <plugins>
+	    <plugins>
+		          <plugin>
+        <artifactId>maven-scm-plugin</artifactId>
+        <version>1.11.2</version>
+        <configuration>
+             <tag>${project.artifactId}-${project.version}</tag>
+        </configuration>
+      </plugin>
             <plugin>
                 <groupId>io.swagger</groupId>
                 <artifactId>swagger-codegen-maven-plugin</artifactId>
