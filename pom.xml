@@ -350,4 +350,9 @@
          <version>${jackson.major.version}</version>
       </dependency>
    </dependencies>
+   <scm>
+	   <url>https://github.com/garyluu/swagger-java-quay-client</url>
+	   <connection>scm:git:git@github.com:garyluu/swagge-java-quay-client</connection>
+	   <developerConnection>scm:git:git@github.com:garyluu/swagge-java-quay-client</developerConnection>
+   </scm>
 </project>
