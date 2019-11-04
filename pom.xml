@@ -6,6 +6,12 @@
     <version>1.2.9-SNAPSHOT</version>
     <name>swagger-java-quay-client</name>
     <url>http://maven.apache.org</url>
+    <parent>
+        <version>1.8.0-alpha.1</version>
+        <groupId>io.dockstore</groupId>
+        <artifactId>dockstore</artifactId>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
     <distributionManagement>
       <repository>
         <id>github</id>
@@ -20,37 +26,157 @@
     </distributionManagement>
     <build>
         <plugins>
-            <!-- activate the plugin -->
             <plugin>
-                <groupId>io.swagger.codegen.v3</groupId>
+                <groupId>io.swagger</groupId>
                 <artifactId>swagger-codegen-maven-plugin</artifactId>
-                <version>3.0.0</version>
                 <executions>
                     <execution>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <!-- specify the swagger yaml -->
                             <inputSpec>swagger.yaml</inputSpec>
-
-                            <!-- target to generate java client code -->
                             <language>java</language>
-
-                            <!-- hint: if you want to generate java server code, e.g. based on Spring Boot,
-                                 you can use the following target: <language>spring</language> -->
-
-                            <!-- pass any necessary config options -->
                             <configOptions>
-                                <dateLibrary>joda</dateLibrary>
+                                <sourceFolder>src/gen/java/main</sourceFolder>
+                                <library>jersey2</library>
+                                <dateLibrary>java8</dateLibrary>
+                                <invokerPackage>io.swagger.quay.client</invokerPackage>
+                                <modelPackage>io.swagger.quay.client.model</modelPackage>
+                                <apiPackage>io.swagger.quay.client.api</apiPackage>
                             </configOptions>
-
-                            <!-- override the default library to jersey2 -->
-                            <library>jersey2</library>
+                            <generateModelTests>false</generateModelTests>
+                            <generateApiTests>false</generateApiTests>
+                            <generateModelDocumentation>false</generateModelDocumentation>
+                            <generateApiDocumentation>false</generateApiDocumentation>
                         </configuration>
                     </execution>
                 </executions>
-	</plugin>
+            </plugin>
+   <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>kill-malformed-client</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                        <configuration>
+                            <excludeDefaultDirectories>true</excludeDefaultDirectories>
+                            <filesets>
+                                <fileset>
+                                    <directory>target/generated-sources/swagger/src/gen/java/main/io/swagger/quay/client/api</directory>
+                                    <includes>
+                                        <include>ManifestApi.java</include>
+                                        <include>SecscanApi.java</include>
+                                    </includes>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- auto-generated java classes should not fail the build on style -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                    <enableFilesSummary>true</enableFilesSummary>
+                    <enableRulesSummary>true</enableRulesSummary>
+                    <failOnViolation>false</failOnViolation>
+                    <failsOnError>false</failsOnError>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>
+                            compile
+                        </phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <consoleOutput>true</consoleOutput>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- auto-generated java classes should not fail the build on bugs -->
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <failOnError>false</failOnError>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <systemProperties>
+                        <property>
+                            <name>loggerPath</name>
+                            <value>conf/log4j.properties</value>
+                        </property>
+                    </systemProperties>
+                    <argLine>-Xms512m -Xmx1500m</argLine>
+                    <parallel>methods</parallel>
+                    <forkMode>pertest</forkMode>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>analyze</id>
+                        <goals>
+                            <goal>analyze-only</goal>
+                        </goals>
+                        <configuration>
+                            <failOnWarning>true</failOnWarning>
+                            <outputXML>true</outputXML>
+                            <ignoreNonCompile>true</ignoreNonCompile>
+                            <usedDependencies>
+                                <usedDependency>com.fasterxml.jackson.core:jackson-core</usedDependency>
+                            </usedDependencies>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- attach test jar -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                </configuration>
+            </plugin>
 	    <plugin>
 		<groupId>org.apache.maven.plugins</groupId>
 		<artifactId>maven-source-plugin</artifactId>
@@ -66,88 +192,136 @@
 			</execution>
 		</executions>
 	   </plugin>
+    <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>test</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${basedir}/target/generated-sources</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>add_sources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/main/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>add_test_sources</id>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>add-test-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/test/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
-    <dependencies>
-         <!-- dependencies are needed for the client being generated -->
-         
+<dependencies>
+        <!-- dependencies are needed for the client being generated -->
+
+
         <dependency>
-          <groupId>io.swagger</groupId>
-          <artifactId>swagger-annotations</artifactId>
-          <version>${swagger-annotations-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.swagger.core.v3</groupId>
+            <groupId>io.swagger</groupId>
             <artifactId>swagger-annotations</artifactId>
-            <version>${swagger-annotations-v3-version}</version>
+            <version>${swagger-annotations-version}</version>
         </dependency>
 
-        <!-- You can find the dependencies for the library configuation you chose by looking in JavaClientCodegen.
-             Then find the corresponding dependency on Maven Central, and set the versions in the property section below -->
-                
         <!-- HTTP client: jersey-client -->
         <dependency>
-          <groupId>org.glassfish.jersey.core</groupId>
-          <artifactId>jersey-client</artifactId>
-          <version>${jersey-version}</version>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-jackson</artifactId>
-            <version>${jersey-version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.jaxrs</groupId>
+                    <artifactId>jackson-jaxrs-base</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.glassfish.jersey.core</groupId>
+                    <artifactId>jersey-common</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.jaxrs</groupId>
+                    <artifactId>jackson-jaxrs-json-provider</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-multipart</artifactId>
-            <version>${jersey-version}</version>
         </dependency>
 
         <!-- JSON processing: jackson -->
         <dependency>
-            <groupId>com.fasterxml.jackson.jaxrs</groupId>
-            <artifactId>jackson-jaxrs-base</artifactId>
-            <version>${jackson-version}</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
         </dependency>
         <dependency>
-          <groupId>com.fasterxml.jackson.core</groupId>
-          <artifactId>jackson-core</artifactId>
-          <version>${jackson-version}</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
-          <groupId>com.fasterxml.jackson.core</groupId>
-          <artifactId>jackson-annotations</artifactId>
-          <version>${jackson-version}</version>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                    <artifactId>jackson-annotations</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
-          <groupId>com.fasterxml.jackson.core</groupId>
-          <artifactId>jackson-databind</artifactId>
-          <version>${jackson-version}</version>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
         </dependency>
         <dependency>
-          <groupId>com.fasterxml.jackson.jaxrs</groupId>
-          <artifactId>jackson-jaxrs-json-provider</artifactId>
-          <version>${jackson-version}</version>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-common</artifactId>
         </dependency>
-        
-        <!-- Joda time: if you use it -->
-        <dependency>
-          <groupId>com.fasterxml.jackson.datatype</groupId>
-          <artifactId>jackson-datatype-joda</artifactId>
-          <version>${jackson-version}</version>
-        </dependency>
-        <dependency>
-          <groupId>joda-time</groupId>
-          <artifactId>joda-time</artifactId>
-          <version>${jodatime-version}</version>
-        </dependency>          
 
-        <!-- Base64 encoding that works in both JVM and Android -->
         <dependency>
-            <groupId>com.brsanthu</groupId>
-            <artifactId>migbase64</artifactId>
-            <version>2.2</version>
-        </dependency>       
-</dependencies>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${jackson.major.version}</version>
+        </dependency>
+    </dependencies>
 	<scm>
 		<url>https://github.com/garyluu/swagger-java-quay-client</url>
 		<connection>scm:git:git://github.com/garyluu/swagger-java-quay-client.git</connection>
@@ -155,13 +329,6 @@
 	  <tag>HEAD</tag>
   </scm>
     <properties>
-        <swagger-annotations-version>1.5.20</swagger-annotations-version>
-        <swagger-annotations-v3-version>2.0.2</swagger-annotations-v3-version>
-        <jersey-version>2.25.1</jersey-version>
-        <jackson-version>2.9.5</jackson-version>
-        <jodatime-version>2.7</jodatime-version>
-        <maven-plugin-version>1.0.0</maven-plugin-version>
-	<junit-version>4.8.1</junit-version>
         <maven.compiler.source>1.6</maven.compiler.source>
         <maven.compiler.target>1.6</maven.compiler.target>
     </properties>
