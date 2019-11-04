@@ -1,0 +1,18 @@
+sudo: required
+services:
+- docker
+
+addons:
+  postgresql: "9.6"
+
+cache:
+  directories:
+  - /tmp/localstack_install_dir
+  - $HOME/.cache/pip
+  - $HOME/.m2/repository
+  - $HOME/apache-maven-3.6.2
+
+dist: bionic
+language: java
+jdk: openjdk12
+script: mvn deploy -Dregistry=https://maven.pkg.github.com/garyluu/swagger-java-quay-client -Dtoken=${GH_TOKEN}
