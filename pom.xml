@@ -4,7 +4,7 @@
    <groupId>io.dockstore</groupId>
    <artifactId>swagger-java-quay-client</artifactId>
    <packaging>jar</packaging>
-   <version>1.0.2-SNAPSHOT</version>
+   <version>1.0.3-SNAPSHOT</version>
    <name>swagger-java-quay-client</name>
    <url>http://maven.apache.org</url>
    <distributionManagement>
