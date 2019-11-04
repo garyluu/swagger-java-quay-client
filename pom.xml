@@ -3,19 +3,19 @@
     <groupId>io.swagger</groupId>
     <artifactId>swagger-java-quay-client</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.9-SNAPSHOT</version>
+    <version>1.2.0-SNAPSHOT</version>
     <name>swagger-java-quay-client</name>
     <url>http://maven.apache.org</url>
     <distributionManagement>
       <repository>
         <id>github</id>
-        <name>GitHub garyluu Apache Maven Packages</name>
-        <url>https://maven.pkg.github.com/garyluu/swagger-java-quay-client</url>
+        <name>releases</name>
+	<url>https://maven.pkg.github.com/garyluu/swagger-java-quay-client/releases</url>
       </repository>
       <snapshotRepository>
         <id>github</id>
-        <name>GitHub garyluu Apache Maven Packages</name>
-        <url>https://maven.pkg.github.com/garyluu/swagger-java-quay-client</url>
+        <name>snapshots</name>
+	<url>https://maven.pkg.github.com/garyluu/swagger-java-quay-client/snapshots</url>
       </snapshotRepository>
     </distributionManagement>
     <build>
