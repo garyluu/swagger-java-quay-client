@@ -7,7 +7,6 @@ cache:
 dist: bionic
 language: java
 jdk: openjdk12
-before_install: "curl -o swagger.yaml 'https://quay.io//api/v1/discovery?' -H 'x-requested-with: XMLHttpRequest'"
 script: bash script.sh || travis_terminate 0
 deploy:
         provider: script

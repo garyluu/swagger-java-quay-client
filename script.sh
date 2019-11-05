@@ -1,4 +1,8 @@
+#!/usr/bin/env bash
+set -x
+
 git checkout -f master
+curl -o swagger.yaml 'https://quay.io//api/v1/discovery?' -H 'x-requested-with: XMLHttpRequest'
 git diff --exit-code
 if [ $? == 0 ] ; then
   exit 1
