@@ -1,6 +1,4 @@
 sudo: false
-services:
-- docker
 
 cache:
   directories:
@@ -13,6 +11,6 @@ before_install: "curl -o swagger.yaml 'https://quay.io//api/v1/discovery?' -H 'x
 script: bash script.sh || travis_terminate 0
 deploy:
         provider: script
-        script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn -Drevision=$TRAVIS_BUILD_NUMBER deploy scm:tag"
+        script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn -B release:prepare release:perform -Dusername=garyluu -Dpassword=${GH_TOKEN}"
         skip_cleanup: true
 

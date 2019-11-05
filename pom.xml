@@ -366,7 +366,6 @@
 		<url>https://github.com/garyluu/swagger-java-quay-client</url>
 		<connection>scm:git:https://github.com/garyluu/swagger-java-quay-client.git</connection>
 		<developerConnection>scm:git:https://github.com/garyluu/swagger-java-quay-client.git</developerConnection>
-	  <tag>HEAD</tag>
   </scm>
     <properties>
         <maven.compiler.source>1.6</maven.compiler.source>
