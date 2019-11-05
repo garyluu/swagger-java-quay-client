@@ -13,6 +13,6 @@ before_install: "curl -o swagger.yaml 'https://quay.io//api/v1/discovery?' -H 'x
 script: bash script.sh || travis_terminate 0
 deploy:
         provider: script
-        script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn -Drevision=$TRAVIS_BUILD_NUMBER deploy"
+        script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn -Drevision=$TRAVIS_BUILD_NUMBER deploy scm:tag"
         skip_cleanup: true
 
