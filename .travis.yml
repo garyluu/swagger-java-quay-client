@@ -11,6 +11,6 @@ install: skip
 script: bash script.sh || travis_terminate 0
 deploy:
         provider: script
-        script: "mvn -B release:prepare release:perform -Dusername=garyluu -Dpassword=${GH_TOKEN}"
+        script: "mvn -B -s settings.xml release:prepare release:perform -Dusername=garyluu -Dpassword=${GH_TOKEN}"
         skip_cleanup: true
 
