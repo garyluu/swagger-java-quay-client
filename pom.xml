@@ -54,15 +54,6 @@
     </distributionManagement>
     <build>
 	    <plugins>
-		          <plugin>
-        <artifactId>maven-scm-plugin</artifactId>
-        <version>1.11.2</version>
-        <configuration>
-		<tag>${project.artifactId}-${project.version}</tag>
-		<username>garyluu</username>
-		<password>${env.GH_TOKEN}</password>
-        </configuration>
-      </plugin>
             <plugin>
                 <groupId>io.swagger</groupId>
                 <artifactId>swagger-codegen-maven-plugin</artifactId>
