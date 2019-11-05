@@ -7,6 +7,7 @@ cache:
 dist: bionic
 language: java
 jdk: openjdk12
+install: skip
 script: bash script.sh || travis_terminate 0
 deploy:
         provider: script
