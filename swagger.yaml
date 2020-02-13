@@ -656,7 +656,7 @@
         "tags": [
           "error"
         ],
-        "description": "Get a detailed description of the error",
+        "description": "Get a detailed description of the error.",
         "parameters": [
           {
             "description": "The error code identifying the type of error.",
@@ -722,7 +722,7 @@
           }
         ],
         "operationId": "createGlobalMessage",
-        "description": "Create a message"
+        "description": "Create a message."
       },
       "x-name": "endpoints.api.globalmessages.GlobalUserMessages",
       "x-tag": "globalmessages",
@@ -760,7 +760,7 @@
         "tags": [
           "globalmessages"
         ],
-        "description": "Return a super users messages",
+        "description": "Return a super users messages.",
         "parameters": [],
         "operationId": "getGlobalMessages"
       }
@@ -1701,7 +1701,7 @@
           }
         ],
         "operationId": "removeOrganizationMember",
-        "description": "Removes a member from an organization, revoking all its repository\n        priviledges and removing it from all teams in the organization."
+        "description": "Removes a member from an organization, revoking all its repository priviledges and removing\n        it from all teams in the organization."
       }
     },
     "/api/v1/organization/{orgname}": {
@@ -1748,7 +1748,7 @@
         "tags": [
           "organization"
         ],
-        "description": "Get the details for the specified organization",
+        "description": "Get the details for the specified organization.",
         "parameters": [
           {
             "description": "The name of the organization",
@@ -2017,7 +2017,7 @@
           }
         ],
         "operationId": "getOrganizationApplication",
-        "description": "Retrieves the application with the specified client_id under the specified organization"
+        "description": "Retrieves the application with the specified client_id under the specified organization."
       },
       "x-path": "/api/v1/organization/{orgname}/applications/{client_id}",
       "x-tag": "organization",
@@ -2328,7 +2328,7 @@
           }
         ],
         "operationId": "getOrganizationApplications",
-        "description": "List the applications for the specified organization"
+        "description": "List the applications for the specified organization."
       },
       "x-path": "/api/v1/organization/{orgname}/applications",
       "x-tag": "organization",
@@ -5770,7 +5770,7 @@
             "in": "path"
           },
           {
-            "description": "Include vulnerabilities informations",
+            "description": "Include vulnerabilities information",
             "required": false,
             "type": "boolean",
             "name": "vulnerabilities",
@@ -6877,7 +6877,7 @@
           }
         ],
         "operationId": "deleteOrganizationTeamMember",
-        "description": "Delete a member of a team. If the user is merely invited to join\n        the team, then the invite is removed instead."
+        "description": "Delete a member of a team.\n\n        If the user is merely invited to join the team, then the invite is removed instead."
       }
     },
     "/api/v1/repository/{repository}/trigger/": {
@@ -7722,7 +7722,7 @@
     },
     {
       "name": "error",
-      "description": "Error details API"
+      "description": "Error details API."
     },
     {
       "name": "globalmessages",
@@ -7778,7 +7778,7 @@
     },
     {
       "name": "signing",
-      "description": "List and manage repository signing information"
+      "description": "List and manage repository signing information."
     },
     {
       "name": "tag",
